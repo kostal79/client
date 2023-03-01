@@ -1,8 +1,46 @@
 @import "../../utils/colors.less";
 
 .navbar {
+    margin: 0 -50px;
+    padding: 20px 50px;
     display: flex;
+    flex-direction: row;
     height: 50px;
     background-color: #fff;
-    width: 100%;
+
+    &__logo {
+        width: 220px;
+    }
+
+
+    &__links {
+        display: flex;
+        column-gap: 20px;
+        text-decoration: underline;
+    }
+
+    &__login {
+        cursor: pointer;
+    }
+
+    &__registration {
+        cursor: pointer;
+    }
+
+    &__search {
+        width: 200px;
+    }
+
 }
+
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    color: @font-color;
+}
+
+
+
