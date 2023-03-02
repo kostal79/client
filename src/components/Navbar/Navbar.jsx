@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/slices/userSlice";
 import { getFiles, searchFile } from "../../actions/file";
 import { showLoader } from "../../redux/slices/appSlice";
+import defaultAvatar from "../../assets/images/defaultavatar.svg"
 
 const Navbar = () => {
   const isAuth = useSelector((state) => state.user.isAuth);
@@ -13,6 +14,7 @@ const Navbar = () => {
   const [searchName, setSearchName] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(false);
   const currentDir = useSelector((state) => state.file.currentDir)
+  const user = useSelector((state) => {state.user.currentUser})
 
   const searchNameHandler = (event) => {
     
@@ -50,6 +52,7 @@ const Navbar = () => {
               onChange={(event) => searchNameHandler(event)}
             />
           )}
+          {isAuth && <img src={avatar} alt="avatar" />}
           {!isAuth && (
             <div className="navbar__login">
               <NavLink to={"/login"}>Enter</NavLink>
