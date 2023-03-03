@@ -1,0 +1,42 @@
+@import url("../../utils/colors.less");
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+
+  &__img {
+    width: 40px;
+    height: 40px;
+  }
+
+  &__text {
+    margin: 5px 0;
+    
+  }
+
+  &__upload {
+    &--label {
+    display: block;
+    text-align: center;
+      border: 1px solid @font-color;
+      padding: 10px 15px;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    &--input {
+      display: none;
+    }
+  }
+
+  &__btn {
+    background-color: transparent;
+    padding: 5px 10px;
+    border: 1px solid @font-color;
+    color: @font-color;
+    font-size: 1rem;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+}

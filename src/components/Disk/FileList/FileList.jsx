@@ -5,7 +5,8 @@ import File from "./File/File";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const FileList = () => {
-  const files = useSelector((state) => state.file.files);
+  const sortMethod = useSelector((state) => state.file.sortMethod);
+  let files = useSelector((state) => state.file.files);
   const view = useSelector((state) => state.file.view);
 
   if (!files.length) {
@@ -21,25 +22,38 @@ const FileList = () => {
           <div className="filelist__size">Size</div>
         </div>
         <TransitionGroup>
-          {files.map((file) => (
-            <CSSTransition
-              key={file._id}
-              timeout={500}
-              classNames={"file"}
-              exit={false}
-            >
-              <File file={file} />
-            </CSSTransition>
-          ))}
+          {sortMethod === "dec"
+            ? files.map((file) => (
+                <CSSTransition
+                  key={file._id}
+                  timeout={500}
+                  classNames={"file"}
+                  exit={false}
+                >
+                  <File file={file} />
+                </CSSTransition>
+              ))
+            : files
+                .map((file) => (
+                  <CSSTransition
+                    key={file._id}
+                    timeout={500}
+                    classNames={"file"}
+                    exit={false}
+                  >
+                    <File file={file} />
+                  </CSSTransition>
+                ))
+                .reverse()}
         </TransitionGroup>
       </div>
     );
   } else if (view === "plate") {
     return (
       <div className="fileplate">
-        {files.map((file) => (
-          <File file={file} key={file._id}/>
-        ))}
+        {sortMethod === "dec"
+          ? files.map((file) => <File file={file} key={file._id} />)
+          : files.map((file) => <File file={file} key={file._id} />).reverse()}
       </div>
     );
   }

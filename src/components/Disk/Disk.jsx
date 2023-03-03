@@ -5,12 +5,15 @@ import {
   deleteFromStack,
   setCurrentDir,
   setPopup,
+  setSortMethod,
   setView,
 } from "../../redux/slices/fileSlice";
 import "./Disk.less";
 import FileList from "./FileList/FileList";
 import Popup from "./Popup";
 import Uploader from "./Uploader/Uploader";
+import backArrow from "../../assets/images/backarrow.svg";
+import sortIcon from "../../assets/images/sorticon.svg";
 
 const Disk = () => {
   const dispatch = useDispatch();
@@ -19,6 +22,7 @@ const Disk = () => {
   const [dragEnter, setDragEnter] = useState(false);
   const [sort, setSort] = useState("type");
   const loader = useSelector((state) => state.app.loader);
+  const sortMethod = useSelector((state) => state.file.sortMethod);
 
   function showPopup() {
     dispatch(setPopup("flex"));
@@ -62,7 +66,7 @@ const Disk = () => {
   if (loader) {
     return (
       <div className="loader">
-        <div class="lds-default">
+        <div className="lds-default">
           <div></div>
           <div></div>
           <div></div>
@@ -92,7 +96,7 @@ const Disk = () => {
           onClick={() => backClickHandler()}
           disabled={currentDir ? false : true}
         >
-          Back
+          <img src={backArrow} alt="back" />
         </button>
         <button className="disk__create" onClick={() => showPopup()}>
           Create dir
@@ -109,6 +113,12 @@ const Disk = () => {
             multiple={true}
           />
         </div>
+        <img
+          className={`disk__sort-icon disk__sort-icon--${sortMethod}`}
+          src={sortIcon}
+          alt="sort method"
+          onClick={() => dispatch(setSortMethod())}
+        />
         <select
           name="sort"
           id="sort"
@@ -122,8 +132,14 @@ const Disk = () => {
           <option value="type">by type</option>
           <option value="date">by date</option>
         </select>
-        <button className="disk__plate" onClick={() => dispatch(setView("plate"))}></button>
-        <button className="disk__list" onClick={() => dispatch(setView("list"))}></button>
+        <button
+          className="disk__plate"
+          onClick={() => dispatch(setView("plate"))}
+        ></button>
+        <button
+          className="disk__list"
+          onClick={() => dispatch(setView("list"))}
+        ></button>
       </div>
       <FileList />
       <Popup />

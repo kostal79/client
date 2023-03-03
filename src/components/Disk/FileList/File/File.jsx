@@ -4,6 +4,8 @@ import dirLogo from "../../../../assets/images/foldericon.svg";
 import fileLogo from "../../../../assets/images/fileicon.svg";
 import platedirLogo from "../../../../assets/images/platefolder.svg";
 import platefileLogo from "../../../../assets/images/platefile.svg";
+import downloadIcon from "../../../../assets/images/download.svg";
+import deleteIcon from "../../../../assets/images/delete.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { pushToStack, setCurrentDir } from "../../../../redux/slices/fileSlice";
 import { deleteFile, downloadFile } from "../../../../actions/file";
@@ -47,14 +49,14 @@ const File = ({ file }) => {
             className="file__btn file__download"
             onClick={(event) => downloadClickHandler(event)}
           >
-            Download
+            <img src={downloadIcon} alt="download" />
           </button>
         )}
         <button
           className="file__btn file__delete"
           onClick={(event) => deleteClickHandler(event)}
         >
-          Delete
+          <img src={deleteIcon} alt="delete" />
         </button>
       </div>
     );
@@ -68,21 +70,23 @@ const File = ({ file }) => {
           alt="file or dir logo"
           className="file-plate__img"
         />
-        <div className="file-plate__name">{file.name.length < 15 ? file.name : file.name.slice(0, 15) + "..."}</div>
+        <div className="file-plate__name">
+          {file.name.length < 15 ? file.name : file.name.slice(0, 15) + "..."}
+        </div>
         <div className="file-plate__btns">
           {file.type !== "dir" && (
             <button
               className="file-plate__btn file__download"
               onClick={(event) => downloadClickHandler(event)}
             >
-              Download
+              <img src={downloadIcon} alt="download" />
             </button>
           )}
           <button
             className="file-plate__btn file__delete"
             onClick={(event) => deleteClickHandler(event)}
           >
-            Delete
+            <img src={deleteIcon} alt="delete" />
           </button>
         </div>
       </div>
